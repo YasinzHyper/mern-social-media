@@ -13,6 +13,7 @@ const corsOptions = {
 const app = express();
 
 app.use(express.json())
+app.use('/uploads', express.static('uploads')) // Serve uploaded images
 app.options("*" , cors(corsOptions));
 app.use(cors(corsOptions));
 app.use(cookieParser())
@@ -38,10 +39,11 @@ app.use('/api', require('./routes/commentRouter'));
 app.use('/api', require('./routes/adminRouter'));
 app.use('/api', require('./routes/notifyRouter'));
 app.use('/api', require('./routes/messageRouter'));
+app.use('/', require('./routes/imageRouter'));
 //#endregion
 
 
-const URI = process.env.MONGODB_URL;
+const URI = process.env.MONGODB_URL || process.env.MONGODB_URL_test;
 mongoose.connect(URI, {
     useCreateIndex:true,
     useFindAndModify:false,

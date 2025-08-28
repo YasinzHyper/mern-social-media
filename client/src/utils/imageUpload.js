@@ -26,11 +26,14 @@ export const imageUpload = async (images) => {
             formData.append("file", item);  
         }
 
-        
-        formData.append("upload_preset", "ADD VALUE HERE");
-        formData.append("cloud_name", "ADD VALUE HERE");
+        // Mock Cloudinary service configuration
+        formData.append("upload_preset", "social_media_preset");
+        formData.append("cloud_name", "social_media_app");
 
-        const res = await fetch("ADD CLOUDINARY IMAGE UPLOAD LINK HERE", {
+        // Use our backend image upload service
+        const uploadUrl = process.env.REACT_APP_IMAGE_UPLOAD_URL || "http://localhost:8080/v1_1/social_media_app/image/upload";
+        
+        const res = await fetch(uploadUrl, {
             method: "POST",
             body: formData
         })

@@ -1,0 +1,15 @@
+services:
+  backend:
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+
+  frontend:
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_IMAGE_UPLOAD_URL=http://localhost:8080/v1_1/social_media_app/image/upload

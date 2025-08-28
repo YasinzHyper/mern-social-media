@@ -37,6 +37,8 @@ const authCtrl = {
         gender,
       });
 
+      await newUser.save();
+
       const access_token = createAccessToken({ id: newUser._id });
       const refresh_token = createRefreshToken({ id: newUser._id });
 
@@ -54,10 +56,6 @@ const authCtrl = {
           password: "",
         },
       });
-
-      await newUser.save();
-
-      res.json({ msg: "registered" });
     } catch (err) {
       return res.status(500).json({ msg: err.message });
     }
