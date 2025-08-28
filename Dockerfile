@@ -12,8 +12,9 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Make entrypoint script executable
-RUN chmod +x entrypoint.sh
+# Make entrypoint script executable and ensure it has Unix line endings
+RUN chmod +x entrypoint.sh && \
+    sed -i 's/\r$//' entrypoint.sh
 
 # Create uploads directory for storing images
 RUN mkdir -p uploads
@@ -22,4 +23,4 @@ RUN mkdir -p uploads
 EXPOSE 8080
 
 # Use custom entrypoint script
-CMD ["./entrypoint.sh"]
+CMD ["sh", "./entrypoint.sh"]
