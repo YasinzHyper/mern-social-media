@@ -34,6 +34,7 @@ services:
       - mongodb
     networks:
       - social-media-network
+    command: sh -c "echo 'Waiting for MongoDB...' && sleep 10 && npm install && echo 'Starting server...' && npm run dev"
 
   # Frontend Service
   frontend:

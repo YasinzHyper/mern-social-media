@@ -12,15 +12,11 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Make entrypoint script executable and ensure it has Unix line endings
-RUN chmod +x entrypoint.sh && \
-    sed -i 's/\r$//' entrypoint.sh
-
 # Create uploads directory for storing images
 RUN mkdir -p uploads
 
 # Expose the port
 EXPOSE 8080
 
-# Use custom entrypoint script
-CMD ["sh", "./entrypoint.sh"]
+# Default command (will be overridden by docker-compose)
+CMD ["npm", "run", "dev"]
